@@ -3,6 +3,9 @@
 *.jou
 vivado/**
 
+#Visual Code studio
+.vscode/**
+
 # Prerequisites
 *.d
 
