@@ -1,6 +1,7 @@
 #export VIVADO=/opt/Xilinx/Vivado/2018.2/bin/vivado
 export VIVADO=/home/lsa/xilinx/2018.2/Vivado/2018.2/bin/vivado
-export VIVADO_DESIGN_NAME=ps_hermes
+export VIVADO_DESIGN_NAME=hermes_axis_ip
+export VIVADO_TOP_NAME=$VIVADO_DESIGN_NAME
 
 if [ -f $VIVADO ]; then
   echo "###################################"
@@ -11,13 +12,13 @@ if [ -f $VIVADO ]; then
   echo "######## Synthesis ######"
   echo "#########################"
   $VIVADO -mode batch -source build_bitstream_export_sdk.tcl
-  echo "#########################"
-  echo "### Loading bitstream ###"
-  echo "#########################"
-  $VIVADO -mode batch -source download_bitstream.tcl
-  echo "#########################"
-  echo "### Bitstream loaded ####"
-  echo "#########################"
+  #echo "#########################"
+  #echo "### Loading bitstream ###"
+  #echo "#########################"
+  #$VIVADO -mode batch -source download_bitstream.tcl
+  #echo "#########################"
+  #echo "### Bitstream loaded ####"
+  #echo "#########################"
   # check whether there is any software to be compiled, i.e., if there is any dir inside src/
   list_dirs=`ls -d ./src/*/ 2> /dev/null`
   # build a bash list 
