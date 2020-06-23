@@ -2,28 +2,31 @@
 
 This repo contains scripts to recreate **DESCRIBE THE MODULE HERE**. The project is setup for Zedboard, although it would be easy to change to other boards assuming you have some basic TCL skills.
 
-The scripts are quite reusable if you keep the same dir structure. It should be useful for other Vivado/SDK projects with minor efforts.
-
 # Module/IP design
 
-![IP interface block](ip-interface.png)
+Describe here your module interface and protocols.
 
-# How to download it
+![Place here a nice picture of your design](my-awesome-module.png)
 
-This repository might have custom IPs included as git submodules. Thus, the following command is required to download all its dependencies.
+# How to use this repository
 
-```
-git clone --recursive https://github.com/amamory/<repo-name>.git
-```
+These scripts presented here are quite reusable if you keep the same dir structure. It should be useful for other Vivado/SDK projects with minor efforts. For this reason this repository is a template. Just click in **Use this Template** button to replicate it for your own project.
 
-If you already cloned the repository without `--recursive`, then run the following command to download all the submodules.
+In command line, create an empty repository called *<your-reponame>* in github and follow these steps to use it as a template:
 
 ```
-git submodule update --init --recursive
+mkdir <my-new-project>
+cd <my-new-project>
+git clone https://github.com/amamory/vivado-base-project.git .
+rm -rf ./git
+git init
+git remote set-url origin https://github.com/<your-username>/<your-reponame>
+git add * .gitignore
+git commit -m "my initial commit"
+git push origin master
 ```
 
-Refer to this [tutorial](https://www.vogella.com/tutorials/GitSubmodules/article.html) to learn how to manage submodules.
-
+Each directory has instructions related to the kind of file you have to place in them.
 
 # How to run it
 
