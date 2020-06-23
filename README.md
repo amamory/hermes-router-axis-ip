@@ -18,7 +18,7 @@ In command line, create an empty repository called *<your-reponame>* in github a
 mkdir <my-new-project>
 cd <my-new-project>
 git clone https://github.com/amamory/vivado-base-project.git .
-rm -rf ./git
+rm -rf .git
 git init
 git remote set-url origin https://github.com/<your-username>/<your-reponame>
 git add * .gitignore
