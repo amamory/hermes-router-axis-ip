@@ -903,7 +903,7 @@
       <spirit:modelParameter xsi:type="spirit:nameValueTypeType" spirit:dataType="std_logic_vector(15 downto 0)">
         <spirit:name>address</spirit:name>
         <spirit:displayName>Address</spirit:displayName>
-        <spirit:value spirit:format="bitString" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.address" spirit:bitStringLength="16">0x0101</spirit:value>
+        <spirit:value spirit:format="bitString" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.address" spirit:bitStringLength="16">0x0011</spirit:value>
       </spirit:modelParameter>
     </spirit:modelParameters>
   </spirit:model>
@@ -970,7 +970,7 @@
     <spirit:parameter>
       <spirit:name>address</spirit:name>
       <spirit:displayName>Address</spirit:displayName>
-      <spirit:value spirit:format="bitString" spirit:resolve="user" spirit:id="PARAM_VALUE.address" spirit:bitStringLength="16">0x0101</spirit:value>
+      <spirit:value spirit:format="bitString" spirit:resolve="user" spirit:id="PARAM_VALUE.address" spirit:bitStringLength="16">0x0011</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>Component_Name</spirit:name>
