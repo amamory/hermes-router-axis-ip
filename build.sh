@@ -50,7 +50,7 @@ if [ -f $VIVADO ]; then
     echo "### End of software compilation  ###"
     echo "####################################"
     echo "execute the following command to launch SDK GUI"
-    echo "xsdk -workspace ./vivado/${VIVADO_DESIGN_NAME}/${VIVADO_DESIGN_NAME}.sdk/ -hwspec ./vivado/${VIVADO_DESIGN_NAME}/${VIVADO_DESIGN_NAME}.sdk/${VIVADO_TOP_NAME}.hdf"
+    echo "xsdk -workspace ./vivado/${VIVADO_DESIGN_NAME}/${VIVADO_DESIGN_NAME}.sdk/ -hwspec ./vivado/${VIVADO_DESIGN_NAME}/${VIVADO_DESIGN_NAME}.sdk/${VIVADO_DESIGN_NAME}.hdf"
     echo "#########################"
     echo "## Loading application ##"
     echo "#########################"
