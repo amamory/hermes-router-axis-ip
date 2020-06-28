@@ -39,6 +39,18 @@ Follow these instructions to recreate the Vivado and SDK projects:
 
 These scripts will recreate the entire Vivado project, compile the design, generate the bitstream, export the hardware to SDK, create the SDK projects, import the source files, build all projects, and finally download both the bitstream and the elf application. Hopefully, all these steps will be executed automatically.
 
+# How to update the scripts
+
+These scripts come from a template repository and they get updated and improved over time. If you wish to get the latest script version, then follow these steps:
+
+```
+git remote add template https://github.com/amamory/vivado-base-project.git
+git fetch --all
+git merge --no-commit --no-ff template/master --allow-unrelated-histories
+```
+
+Solve any conflict manually and then commit.
+
 # Future work
 
  - update the scripts to Vitis
