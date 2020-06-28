@@ -25,7 +25,7 @@ if [ -f $VIVADO ]; then
   # if the component.xml is found in more than 3 dir layers, then this project uses custom IPs
   # Finally, there is no component.xml at all under hw/ips, then this project do not uses any custom IP
   leafIPs=$(find hw/ips/*/ -maxdepth 1 -name *.xml | wc -l) 
-  if [ "$leafIPs" -ge 0 ]; 
+  if [ "$leafIPs" -eq 0 ]; 
   then
     echo "#########################"
     echo "### Loading bitstream ###"
