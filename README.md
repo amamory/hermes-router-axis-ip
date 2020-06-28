@@ -33,8 +33,11 @@ Each directory has instructions related to the kind of file you have to place in
 These scripts are assuming Linux operation system (Ubuntu 18.04) and Vivado 2018.2.
 
 Follow these instructions to recreate the Vivado and SDK projects:
- - Open the **build.sh** script and edit the first two lines to setup the environment variables 
-**VIVADO**, **VIVADO_DESIGN_NAME**, **XIL_APP_NAME**, and **VIVADO_TOP_NAME** (optional). 
+ - Open the **build.sh** script and edit the first two lines to setup the environment variables:
+    - **VIVADO**: path to the Vivado install dir;
+    - **VIVADO_DESIGN_NAME**: mandatory name of the design
+    - **XIL_APP_NAME**: used only in projects with software. Not used in this design; 
+    - **VIVADO_TOP_NAME**: set the top name (optional).  
  - run *build.sh*
 
 These scripts will recreate the entire Vivado project, compile the design, generate the bitstream, export the hardware to SDK, create the SDK projects, import the source files, build all projects, and finally download both the bitstream and the elf application. Hopefully, all these steps will be executed automatically.
