@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_time_synth.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="260442222fs"></ZoomStartTime>
+      <ZoomEndTime time="484842223fs"></ZoomEndTime>
+      <Cursor1Time time="384668000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="146"></NameColumnWidth>
+      <ValueColumnWidth column_width="77"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="54" />
+   <wave_markers>
+      <marker label="" time="384668000" />
+   </wave_markers>
+   <wvobject type="logic" fp_name="/tb/router/clock">
+      <obj_property name="ElementShortName">clock</obj_property>
+      <obj_property name="ObjectShortName">clock</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/dataE_i">
+      <obj_property name="ElementShortName">dataE_i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataE_i[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/dataN_i">
+      <obj_property name="ElementShortName">dataN_i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataN_i[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/dataS_i">
+      <obj_property name="ElementShortName">dataS_i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataS_i[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/dataW_i">
+      <obj_property name="ElementShortName">dataW_i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataW_i[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/validE_i">
+      <obj_property name="ElementShortName">validE_i</obj_property>
+      <obj_property name="ObjectShortName">validE_i</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/validN_i">
+      <obj_property name="ElementShortName">validN_i</obj_property>
+      <obj_property name="ObjectShortName">validN_i</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/validS_i">
+      <obj_property name="ElementShortName">validS_i</obj_property>
+      <obj_property name="ObjectShortName">validS_i</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/validW_i">
+      <obj_property name="ElementShortName">validW_i</obj_property>
+      <obj_property name="ObjectShortName">validW_i</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/readyE_o">
+      <obj_property name="ElementShortName">readyE_o</obj_property>
+      <obj_property name="ObjectShortName">readyE_o</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/readyN_o">
+      <obj_property name="ElementShortName">readyN_o</obj_property>
+      <obj_property name="ObjectShortName">readyN_o</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/readyS_o">
+      <obj_property name="ElementShortName">readyS_o</obj_property>
+      <obj_property name="ObjectShortName">readyS_o</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/readyW_o">
+      <obj_property name="ElementShortName">readyW_o</obj_property>
+      <obj_property name="ObjectShortName">readyW_o</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/dataL_i">
+      <obj_property name="ElementShortName">dataL_i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataL_i[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/validL_i">
+      <obj_property name="ElementShortName">validL_i</obj_property>
+      <obj_property name="ObjectShortName">validL_i</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/readyL_o">
+      <obj_property name="ElementShortName">readyL_o</obj_property>
+      <obj_property name="ObjectShortName">readyL_o</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/FLocal/\data[4] ">
+      <obj_property name="ElementShortName">\data[4] [32:0]</obj_property>
+      <obj_property name="ObjectShortName">\data[4] [32:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FFA500</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/FLocal/ack_h">
+      <obj_property name="ElementShortName">ack_h[0:0]</obj_property>
+      <obj_property name="ObjectShortName">ack_h[0:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FFA500</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/FLocal/clock">
+      <obj_property name="ElementShortName">clock</obj_property>
+      <obj_property name="ObjectShortName">clock</obj_property>
+      <obj_property name="CustomSignalColor">#FFA500</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/FLocal/clock_IBUF_BUFG">
+      <obj_property name="ElementShortName">clock_IBUF_BUFG</obj_property>
+      <obj_property name="ObjectShortName">clock_IBUF_BUFG</obj_property>
+      <obj_property name="CustomSignalColor">#FFA500</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/FLocal/data_ack">
+      <obj_property name="ElementShortName">data_ack[0:0]</obj_property>
+      <obj_property name="ObjectShortName">data_ack[0:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FFA500</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/FLocal/data_av[0]">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">[0]</obj_property>
+      <obj_property name="ObjectShortName">[0]</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="label">data_av</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/FLocal/data_in">
+      <obj_property name="ElementShortName">data_in[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FFA500</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/FLocal/h">
+      <obj_property name="ElementShortName">h[0:0]</obj_property>
+      <obj_property name="ObjectShortName">h[0:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FFA500</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/FLocal/readyL_o_OBUF">
+      <obj_property name="ElementShortName">readyL_o_OBUF</obj_property>
+      <obj_property name="ObjectShortName">readyL_o_OBUF</obj_property>
+      <obj_property name="CustomSignalColor">#FFA500</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/FLocal/reset_IBUF">
+      <obj_property name="ElementShortName">reset_IBUF</obj_property>
+      <obj_property name="ObjectShortName">reset_IBUF</obj_property>
+      <obj_property name="CustomSignalColor">#FFA500</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/FLocal/sender">
+      <obj_property name="ElementShortName">sender[0:0]</obj_property>
+      <obj_property name="ObjectShortName">sender[0:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FFA500</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/FLocal/counter_flit">
+      <obj_property name="ElementShortName">counter_flit[31:0]</obj_property>
+      <obj_property name="ObjectShortName">counter_flit[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FFA500</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/FLocal/EA">
+      <obj_property name="ElementShortName">EA[2:0]</obj_property>
+      <obj_property name="ObjectShortName">EA[2:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FFA500</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/FLocal/first">
+      <obj_property name="ElementShortName">first[1:0]</obj_property>
+      <obj_property name="ObjectShortName">first[1:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FFA500</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/FLocal/last">
+      <obj_property name="ElementShortName">last[1:0]</obj_property>
+      <obj_property name="ObjectShortName">last[1:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FFA500</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/FLocal/validL_i_IBUF">
+      <obj_property name="ElementShortName">validL_i_IBUF</obj_property>
+      <obj_property name="ObjectShortName">validL_i_IBUF</obj_property>
+      <obj_property name="CustomSignalColor">#FFA500</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/FLocal/tem_espaco_i_1__3_n_0">
+      <obj_property name="ElementShortName">tem_espaco_i_1__3_n_0</obj_property>
+      <obj_property name="ObjectShortName">tem_espaco_i_1__3_n_0</obj_property>
+      <obj_property name="CustomSignalColor">#FFA500</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/dataE_o">
+      <obj_property name="ElementShortName">dataE_o[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataE_o[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/validE_o">
+      <obj_property name="ElementShortName">validE_o</obj_property>
+      <obj_property name="ObjectShortName">validE_o</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/lastE_o">
+      <obj_property name="ElementShortName">lastE_o</obj_property>
+      <obj_property name="ObjectShortName">lastE_o</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/readyE_i">
+      <obj_property name="ElementShortName">readyE_i</obj_property>
+      <obj_property name="ObjectShortName">readyE_i</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/dataN_o">
+      <obj_property name="ElementShortName">dataN_o[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataN_o[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/validN_o">
+      <obj_property name="ElementShortName">validN_o</obj_property>
+      <obj_property name="ObjectShortName">validN_o</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/lastN_o">
+      <obj_property name="ElementShortName">lastN_o</obj_property>
+      <obj_property name="ObjectShortName">lastN_o</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/readyN_i">
+      <obj_property name="ElementShortName">readyN_i</obj_property>
+      <obj_property name="ObjectShortName">readyN_i</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/dataW_o">
+      <obj_property name="ElementShortName">dataW_o[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataW_o[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/validW_o">
+      <obj_property name="ElementShortName">validW_o</obj_property>
+      <obj_property name="ObjectShortName">validW_o</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/lastW_o">
+      <obj_property name="ElementShortName">lastW_o</obj_property>
+      <obj_property name="ObjectShortName">lastW_o</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/readyW_i">
+      <obj_property name="ElementShortName">readyW_i</obj_property>
+      <obj_property name="ObjectShortName">readyW_i</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/dataS_o">
+      <obj_property name="ElementShortName">dataS_o[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataS_o[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/validS_o">
+      <obj_property name="ElementShortName">validS_o</obj_property>
+      <obj_property name="ObjectShortName">validS_o</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/lastS_o">
+      <obj_property name="ElementShortName">lastS_o</obj_property>
+      <obj_property name="ObjectShortName">lastS_o</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/readyS_i">
+      <obj_property name="ElementShortName">readyS_i</obj_property>
+      <obj_property name="ObjectShortName">readyS_i</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/dataL_o">
+      <obj_property name="ElementShortName">dataL_o[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataL_o[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/validL_o">
+      <obj_property name="ElementShortName">validL_o</obj_property>
+      <obj_property name="ObjectShortName">validL_o</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/lastL_o">
+      <obj_property name="ElementShortName">lastL_o</obj_property>
+      <obj_property name="ObjectShortName">lastL_o</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/readyL_i">
+      <obj_property name="ElementShortName">readyL_i</obj_property>
+      <obj_property name="ObjectShortName">readyL_i</obj_property>
+   </wvobject>
+</wave_config>
