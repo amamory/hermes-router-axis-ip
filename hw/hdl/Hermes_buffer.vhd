@@ -56,7 +56,8 @@ port(
         h:          out std_logic;
         ack_h:      in  std_logic;
         data_av:    out std_logic;
-        data:       out regflit;
+        -- AMORY: data out has one additional bit to include the 'last' signal
+        data:       out std_logic_vector(TAM_FLIT downto 0);
         data_ack:   in  std_logic;
         sender:     out std_logic);
 end Hermes_buffer;
@@ -69,6 +70,9 @@ signal EA : fila_out;
 signal buf: buff;-- := (others=>(others=>'0'));
 signal first,last: pointer;-- := (others=>'0');
 signal tem_espaco: std_logic;-- := '0';
+-- AMORY this signal goes high for one clock cycle when the last flit is sent  
+signal last_flit: std_logic;
+signal data_av_s: std_logic;
 signal counter_flit: regflit;-- := (others=>'0');
 
 --attribute KEEP : string;
@@ -153,7 +157,10 @@ begin
         -------------------------------------------------------------------------------------------
 
         -- disponibiliza o dado para transmiss�o.
-        data <= buf(CONV_INTEGER(first));
+        data(TAM_FLIT-1 downto 0) <= buf(CONV_INTEGER(first));
+        data(TAM_FLIT) <= last_flit;
+        data_av <= data_av_s;
+        last_flit <= '1' when counter_flit = x"1" and EA = S_PAYLOAD and data_av_s = '1' else '0';
 
         -- Quando sinal reset � ativado a m�quina de estados avan�a para o estado S_INIT.
         -- No estado S_INIT os sinais counter_flit (contador de flits do corpo do pacote), h (que
@@ -181,16 +188,18 @@ begin
                 if reset='1' then
                         counter_flit <= (others=>'0');
                         h <= '0';
-                        data_av <= '0';
+                        data_av_s <= '0';
                         sender <=  '0';
                         first <= (others=>'0');
                         EA <= S_INIT;
+                        --last_flit <= '0';
                 elsif clock'event and clock='1' then
                         case EA is
                                 when S_INIT =>
                                         counter_flit <= (others=>'0');
                                         h<='0';
-                                        data_av <= '0';
+                                        data_av_s <= '0';
+                                        --last_flit <= '0';
                                         if first /= last then -- detectou dado na fila
                                                 h<='1';           -- pede roteamento
                                                 EA <= S_HEADER;
@@ -201,7 +210,7 @@ begin
                                         if ack_h='1' then -- confirma��o de roteamento
                                                 EA <= S_SENDHEADER ;
                                                 h<='0';
-                                                data_av <= '1';
+                                                data_av_s <= '1';
                                                 sender <=  '1';
                                         else
                                                 EA <= S_HEADER;
@@ -211,13 +220,13 @@ begin
                                                 -- retira o header do buffer e se tem dado no buffer pede envio do mesmo
                                                 if (first = TAM_BUFFER -1) then
                                                         first <= (others=>'0');
-                                                        if last /= 0 then data_av <= '1';
-                                                        else data_av <= '0';
+                                                        if last /= 0 then data_av_s <= '1';
+                                                        else data_av_s <= '0';
                                                         end if;
                                                 else
                                                         first <= first+1;
-                                                        if first+1 /= last then data_av <= '1';
-                                                        else data_av <= '0';
+                                                        if first+1 /= last then data_av_s <= '1';
+                                                        else data_av_s <= '0';
                                                         end if;
                                                 end if;
                                                 EA <= S_PAYLOAD;
@@ -234,35 +243,43 @@ begin
                                                 -- retira um dado do buffer e se tem dado no buffer pede envio do mesmo
                                                 if (first = TAM_BUFFER -1) then
                                                         first <= (others=>'0');
-                                                        if last /= 0 then data_av <= '1';
-                                                        else data_av <= '0';
+                                                        if last /= 0 then data_av_s <= '1';
+                                                        else data_av_s <= '0';
                                                         end if;
                                                 else
                                                         first <= first+1;
-                                                        if first+1 /= last then data_av <= '1';
-                                                        else data_av <= '0';
+                                                        if first+1 /= last then data_av_s <= '1';
+                                                        else data_av_s <= '0';
                                                         end if;
                                                 end if;
+--                                               if data_ack = '1' and counter_flit = x"2" then
+--                                                   last_flit <= '1';
+--                                               else
+--                                                   last_flit <= '0';
+--                                               end if;
                                                 EA <= S_PAYLOAD;
                                         elsif data_ack = '1' and counter_flit = x"1" then -- confirma��o do envio do tail
                                                 -- retira um dado do buffer
                                                 if (first = TAM_BUFFER -1) then    first <= (others=>'0');
                                                 else first <= first+1;
                                                 end if;
-                                                data_av <= '0';
+                                                data_av_s <= '0';
                                                 sender <=  '0';
+                                                --last_flit <= '0';
                                                 EA <= S_END;
                                         elsif first /= last then -- se tem dado a ser enviado faz a requisi��o
-                                                data_av <= '1';
+                                                data_av_s <= '1';
+                                                --last_flit <= '0';
                                                 EA <= S_PAYLOAD;
                                         else
                                                 EA <= S_PAYLOAD;
                                         end if;
                                 when S_END =>
-                                        data_av <= '0';
+                                        data_av_s <= '0';
+                                        --last_flit <= '0';
                                         EA <= S_END2;
                                 when S_END2 => -- estado necessario para permitir a libera��o da porta antes da solicita��o de novo envio
-                                        data_av <= '0';
+                                        data_av_s <= '0';
                                         EA <= S_INIT;
                         end case;
                 end if;

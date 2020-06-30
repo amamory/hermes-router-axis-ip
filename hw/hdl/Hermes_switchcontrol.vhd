@@ -25,7 +25,7 @@ port(
         h :       in  regNport;
         ack_h :   out regNport;
         address : in  regmetadeflit;
-        data :    in  arrayNport_regflit;
+        data :    in  arrayNport_regflit_last;
         sender :  in  regNport;
         free :    out regNport;
         mux_in :  out arrayNport_reg3;
@@ -79,7 +79,7 @@ begin
 
         ask <= '1' when h(LOCAL)='1' or h(EAST)='1' or h(WEST)='1' or h(NORTH)='1' or h(SOUTH)='1' else '0';
         incoming <= CONV_VECTOR(sel);
-        header <= data(CONV_INTEGER(incoming));
+        header <= data(CONV_INTEGER(incoming))(TAM_FLIT-1 downto 0);
 
         process(sel,h)
         begin

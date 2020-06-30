@@ -32,14 +32,14 @@ use work.HeMPS_defaults.all;
 entity Hermes_crossbar is
 port(
         data_av:     in  regNport;
-        data_in:     in  arrayNport_regflit;
+        data_in:     in  arrayNport_regflit_last;
         data_ack:    out regNport;
         --sender:      in  regNport;
         free:        in  regNport;
         tab_in:      in  arrayNport_reg3;
         tab_out:     in  arrayNport_reg3;
         tx:          out regNport;
-        data_out:    out arrayNport_regflit;
+        data_out:    out arrayNport_regflit_last;
         credit_i:    in  regNport);
 end Hermes_crossbar;
 

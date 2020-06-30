@@ -49,6 +49,10 @@
 --  come�a a enviar os flits armazenados. Quando todos os flits do pacote foram 
 --  enviados, a conex�o � conclu�da pela sinaliza��o, por parte da fila, atrav�s do 
 --  sinal sender.
+
+-- AMORY: in order to be compatible with AXI streaming interface std used in Zynq devices,
+-- I included the last output port at the master interfaces. This port is asserted for one 
+-- clock cycle when the last flit is sent   
 ---------------------------------------------------------------------------------------
 library IEEE;
 use IEEE.std_logic_1164.all;
@@ -58,57 +62,63 @@ use work.HeMPS_defaults.all;
 entity RouterCC is
 generic( address: std_logic_vector(15 downto 0) := "0000000100000001");
 port(
-        clock:     in  std_logic;
-        reset:     in  std_logic;
+        clock:    in  std_logic;
+        reset:    in  std_logic;
         -- AXI Stream slave interfaces: E, W, N, S, Local ports
-        validE_i:     in  std_logic;
-        dataE_i:   in  std_logic_vector(TAM_FLIT-1 downto 0);
+        validE_i: in  std_logic;
+        dataE_i:  in  std_logic_vector(TAM_FLIT-1 downto 0);
         readyE_o: out std_logic;    
 
-        validW_i:     in  std_logic;
-        dataW_i:   in  std_logic_vector(TAM_FLIT-1 downto 0);
+        validW_i: in  std_logic;
+        dataW_i:  in  std_logic_vector(TAM_FLIT-1 downto 0);
         readyW_o: out std_logic;    
 
-        validN_i:     in  std_logic;
-        dataN_i:   in  std_logic_vector(TAM_FLIT-1 downto 0);
+        validN_i: in  std_logic;
+        dataN_i:  in  std_logic_vector(TAM_FLIT-1 downto 0);
         readyN_o: out std_logic;    
 
-        validS_i:     in  std_logic;
-        dataS_i:   in  std_logic_vector(TAM_FLIT-1 downto 0);
+        validS_i: in  std_logic;
+        dataS_i:  in  std_logic_vector(TAM_FLIT-1 downto 0);
         readyS_o: out std_logic;    
 
-        validL_i:     in  std_logic;
-        dataL_i:   in  std_logic_vector(TAM_FLIT-1 downto 0);
+        validL_i: in  std_logic;
+        dataL_i:  in  std_logic_vector(TAM_FLIT-1 downto 0);
         readyL_o: out std_logic;    
 
         -- AXI Stream master interfaces: E, W, N, S, Local ports
-        validE_o:     out std_logic;
-        dataE_o:   out std_logic_vector(TAM_FLIT-1 downto 0);
+        validE_o: out std_logic;
+        dataE_o:  out std_logic_vector(TAM_FLIT-1 downto 0);
         readyE_i: in  std_logic;
+        lastE_o : out std_logic;
 
-        validW_o:     out std_logic;
-        dataW_o:   out std_logic_vector(TAM_FLIT-1 downto 0);
+        validW_o: out std_logic;
+        dataW_o:  out std_logic_vector(TAM_FLIT-1 downto 0);
         readyW_i: in  std_logic;
+        lastW_o : out std_logic;
 
-        validN_o:     out std_logic;
-        dataN_o:   out std_logic_vector(TAM_FLIT-1 downto 0);
+        validN_o: out std_logic;
+        dataN_o:  out std_logic_vector(TAM_FLIT-1 downto 0);
         readyN_i: in  std_logic;
+        lastN_o : out std_logic;
 
-        validS_o:     out std_logic;
-        dataS_o:   out std_logic_vector(TAM_FLIT-1 downto 0);
+        validS_o: out std_logic;
+        dataS_o:  out std_logic_vector(TAM_FLIT-1 downto 0);
         readyS_i: in  std_logic;
+        lastS_o : out std_logic;
 
-        validL_o:     out std_logic;
-        dataL_o:   out std_logic_vector(TAM_FLIT-1 downto 0);
-        readyL_i: in  std_logic
+        validL_o: out std_logic;
+        dataL_o:  out std_logic_vector(TAM_FLIT-1 downto 0);
+        readyL_i: in  std_logic;
+        lastL_o : out std_logic
 
         );
 end RouterCC;
 
 architecture RouterCC of RouterCC is
+
 signal h, ack_h, data_av, sender, data_ack: std_logic_vector(4 downto 0);
-signal data: arrayNport_regflit;
-signal data_out_crossbar: arrayNport_regflit;
+signal data: arrayNport_regflit_last;
+signal data_out_crossbar: arrayNport_regflit_last;
 signal mux_in, mux_out: arrayNport_reg3;
 signal free: std_logic_vector(4 downto 0);
 signal clock_rx: std_logic_vector(4 downto 0);
@@ -235,10 +245,16 @@ begin
         credit_s(3) <= readyS_i;
         credit_s(4) <= readyL_i;
         
-        dataE_o <= data_out_crossbar(0);
-        dataW_o <= data_out_crossbar(1);
-        dataN_o <= data_out_crossbar(2);
-        dataS_o <= data_out_crossbar(3);
-        dataL_o <= data_out_crossbar(4);
+        dataE_o <= data_out_crossbar(0)(TAM_FLIT-1 downto 0);
+        dataW_o <= data_out_crossbar(1)(TAM_FLIT-1 downto 0);
+        dataN_o <= data_out_crossbar(2)(TAM_FLIT-1 downto 0);
+        dataS_o <= data_out_crossbar(3)(TAM_FLIT-1 downto 0);
+        dataL_o <= data_out_crossbar(4)(TAM_FLIT-1 downto 0);
+        
+        lastE_o <= data_out_crossbar(0)(TAM_FLIT);
+        lastW_o <= data_out_crossbar(1)(TAM_FLIT);
+        lastN_o <= data_out_crossbar(2)(TAM_FLIT);
+        lastS_o <= data_out_crossbar(3)(TAM_FLIT);
+        lastL_o <= data_out_crossbar(4)(TAM_FLIT);
 
 end RouterCC;
