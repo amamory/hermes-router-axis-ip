@@ -26,31 +26,24 @@ architecture tb of tb is
     signal validL_o : std_logic;                    
     signal dataL_o  : std_logic_vector(31 downto 0);
     signal readyL_i : std_logic;                    
-    signal lastL_o  : std_logic;                    
 	
     -- other master ports
     signal validE_o : std_logic;                    
     signal dataE_o  : std_logic_vector(31 downto 0);
     signal readyE_i : std_logic;                    
-    signal lastE_o  : std_logic;                    
             
     signal validW_o : std_logic;                    
     signal dataW_o  : std_logic_vector(31 downto 0);
     signal readyW_i : std_logic;                    
-    signal lastW_o  : std_logic;                    
             
     signal validN_o : std_logic;                    
     signal dataN_o  : std_logic_vector(31 downto 0);
     signal readyN_i : std_logic;                    
-    signal lastN_o  : std_logic;                    
             
     signal validS_o : std_logic;                    
     signal dataS_o  : std_logic_vector(31 downto 0);
     signal readyS_i : std_logic;                    
-    signal lastS_o  : std_logic;                    
             
-	
-	
 	
 	-- send one work according to the AXI Streaming master protocol
 	procedure SendFlit(signal clock  : in  std_logic;
@@ -167,27 +160,22 @@ begin
         validE_o => validE_o,
         dataE_o  => dataE_o ,
         readyE_i => readyE_i,
-        lastE_o  => lastE_o ,
 
         validW_o => validW_o,
         dataW_o  => dataW_o ,
         readyW_i => readyW_i,
-        lastW_o  => lastW_o ,
 
         validN_o => validN_o,
         dataN_o  => dataN_o ,
         readyN_i => readyN_i,
-        lastN_o  => lastN_o ,
 
         validS_o => validS_o,
         dataS_o  => dataS_o ,
         readyS_i => readyS_i,
-        lastS_o  => lastS_o ,
 
         validL_o => validL_o,
         dataL_o  => dataL_o ,
-        readyL_i => readyL_i,
-        lastL_o  => lastL_o 
+        readyL_i => readyL_i
 	);
 	
 end tb;
