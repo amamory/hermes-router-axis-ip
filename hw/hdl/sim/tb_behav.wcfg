@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="4000000001fs"></ZoomEndTime>
-      <Cursor1Time time="4000000000fs"></Cursor1Time>
+      <ZoomStartTime time="963314373fs"></ZoomStartTime>
+      <ZoomEndTime time="1063428139fs"></ZoomEndTime>
+      <Cursor1Time time="1080000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="146"></NameColumnWidth>
       <ValueColumnWidth column_width="73"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="55" />
+   <WVObjectSize size="59" />
    <wave_markers>
       <marker label="" time="360000000" />
       <marker label="" time="640000000" />
@@ -80,33 +80,57 @@
       <obj_property name="ElementShortName">readyS_o</obj_property>
       <obj_property name="ObjectShortName">readyS_o</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/tb/router/validL_i">
-      <obj_property name="ElementShortName">validL_i</obj_property>
-      <obj_property name="ObjectShortName">validL_i</obj_property>
-      <obj_property name="CustomSignalColor">#0000FF</obj_property>
+   <wvobject type="logic" fp_name="/tb/router/Last_Local/clock">
+      <obj_property name="ElementShortName">clock</obj_property>
+      <obj_property name="ObjectShortName">clock</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/tb/router/dataL_i">
-      <obj_property name="ElementShortName">dataL_i[31:0]</obj_property>
-      <obj_property name="ObjectShortName">dataL_i[31:0]</obj_property>
-      <obj_property name="CustomSignalColor">#0000FF</obj_property>
+   <wvobject type="logic" fp_name="/tb/router/Last_Local/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/tb/router/readyL_o">
-      <obj_property name="ElementShortName">readyL_o</obj_property>
-      <obj_property name="ObjectShortName">readyL_o</obj_property>
-      <obj_property name="CustomSignalColor">#0000FF</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/tb/lastL_o">
-      <obj_property name="ElementShortName">lastL_o</obj_property>
-      <obj_property name="ObjectShortName">lastL_o</obj_property>
+   <wvobject type="logic" fp_name="/tb/router/Last_Local/validL_o">
+      <obj_property name="ElementShortName">validL_o</obj_property>
+      <obj_property name="ObjectShortName">validL_o</obj_property>
       <obj_property name="CustomSignalColor">#0000FF</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/tb/router/Last_Local/lastL_o">
       <obj_property name="ElementShortName">lastL_o</obj_property>
       <obj_property name="ObjectShortName">lastL_o</obj_property>
+      <obj_property name="CustomSignalColor">#0000FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/Last_Local/dataL_o">
+      <obj_property name="ElementShortName">dataL_o[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataL_o[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#0000FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/Last_Local/readyL_i">
+      <obj_property name="ElementShortName">readyL_i</obj_property>
+      <obj_property name="ObjectShortName">readyL_i</obj_property>
+      <obj_property name="CustomSignalColor">#0000FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/Last_Local/valid_i">
+      <obj_property name="ElementShortName">valid_i</obj_property>
+      <obj_property name="ObjectShortName">valid_i</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/Last_Local/data_i">
+      <obj_property name="ElementShortName">data_i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_i[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/Last_Local/ready_o">
+      <obj_property name="ElementShortName">ready_o</obj_property>
+      <obj_property name="ObjectShortName">ready_o</obj_property>
       <obj_property name="CustomSignalColor">#FF00FF</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>

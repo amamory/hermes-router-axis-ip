@@ -40,24 +40,42 @@ type state_type is (WAIT_HEADER,HEADER,PKT_SIZE,PAYLOAD,LAST_FLIT);
 signal state: state_type;
 
 signal flit_cnt: std_logic_vector(TAM_FLIT-1 downto 0);
+signal data_s: std_logic_vector(TAM_FLIT-1 downto 0);
+signal valid_s, readyL_s , lastL_s: std_logic;
 
 begin
 
-    validL_o <= valid_i;
-    dataL_o  <= data_i;
-    ready_o  <= readyL_i;
+    validL_o <= valid_s;
+    dataL_o  <= data_s;
+    ready_o  <= readyL_s;
+    
+    process(reset, clock)
+    begin
+        if reset='1' then
+            valid_s <= '0';
+            data_s  <= (others => '0');
+            readyL_s  <= '0';
+            lastL_o <= '0';
+        elsif clock'event and clock='1' then
+            valid_s <= valid_i;
+            data_s  <= data_i;
+            readyL_s  <= readyL_i;
+            lastL_o   <= lastL_s;
+        end if;
+    end process;    
+    
     
     process(reset,clock)
     begin
         if reset='1' then
             state<=WAIT_HEADER;
             flit_cnt <= (others => '0'); 
-            lastL_o <= '0';
-        elsif clock'event and clock='1' then
+            lastL_s <= '0';
+        elsif clock'event and clock='0' then
             case state is
                 when WAIT_HEADER => 
                     flit_cnt <= (others => '0'); 
-                    lastL_o <= '0';
+                    lastL_s <= '0';
                     state <= WAIT_HEADER;
                     if readyL_i = '1' and valid_i = '1' then
                         state <= HEADER;
@@ -66,13 +84,14 @@ begin
                     state <= HEADER;
                     if readyL_i = '1' and valid_i = '1' then
                         state <= PKT_SIZE;
+                        flit_cnt <= data_i;
                     end if;
                 when PKT_SIZE =>
                     state <= PKT_SIZE;
                     if readyL_i = '1' and valid_i = '1' then
-                        flit_cnt <= data_i;
-                        if data_i = x"0001" then
-                            state <= LAST_FLIT;
+                        if flit_cnt = x"0001" then
+                            state <= WAIT_HEADER;
+                            lastL_s <= '1';
                         else
                             state <= PAYLOAD;
                          end if; 
@@ -82,19 +101,23 @@ begin
                     if readyL_i = '1' and valid_i = '1' then
                         flit_cnt <= flit_cnt -1;
                         if flit_cnt = x"0002" then
-                            state <= LAST_FLIT;
+                            state <= WAIT_HEADER;
+                            lastL_s <= '1';
                         end if;
                     end if;
                 when LAST_FLIT =>
+                    lastL_s <= '0';
                     state <= LAST_FLIT;
                     if readyL_i = '1' and valid_i = '1' then
                         state <= WAIT_HEADER;
-                        lastL_o <= '1';
+                        
                     end if;
                 when others => 
                     state <= WAIT_HEADER;
             end case;
         end if;
     end process;
+    
+    --lastL_o <= '1' when  readyL_s = '1' and valid_s = '1' and state = LAST_FLIT else '0';
 
 end Last_gen;
