@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="928400000fs"></ZoomStartTime>
-      <ZoomEndTime time="1193663158fs"></ZoomEndTime>
-      <Cursor1Time time="11000000000fs"></Cursor1Time>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="4000000001fs"></ZoomEndTime>
+      <Cursor1Time time="4000000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="146"></NameColumnWidth>
-      <ValueColumnWidth column_width="77"></ValueColumnWidth>
+      <ValueColumnWidth column_width="73"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="56" />
+   <WVObjectSize size="55" />
    <wave_markers>
       <marker label="" time="360000000" />
       <marker label="" time="640000000" />
@@ -98,6 +98,30 @@
       <obj_property name="CustomSignalColor">#0000FF</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
+   <wvobject type="logic" fp_name="/tb/lastL_o">
+      <obj_property name="ElementShortName">lastL_o</obj_property>
+      <obj_property name="ObjectShortName">lastL_o</obj_property>
+      <obj_property name="CustomSignalColor">#0000FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb/router/Last_Local/lastL_o">
+      <obj_property name="ElementShortName">lastL_o</obj_property>
+      <obj_property name="ObjectShortName">lastL_o</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/tb/router/Last_Local/state">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb/router/Last_Local/flit_cnt">
+      <obj_property name="ElementShortName">flit_cnt[31:0]</obj_property>
+      <obj_property name="ObjectShortName">flit_cnt[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
    <wvobject type="logic" fp_name="/tb/router/FLocal/clock">
       <obj_property name="ElementShortName">clock</obj_property>
       <obj_property name="ObjectShortName">clock</obj_property>
@@ -153,8 +177,8 @@
       <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/tb/router/FLocal/data">
-      <obj_property name="ElementShortName">data[32:0]</obj_property>
-      <obj_property name="ObjectShortName">data[32:0]</obj_property>
+      <obj_property name="ElementShortName">data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data[31:0]</obj_property>
       <obj_property name="CustomSignalColor">#FFA500</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
@@ -200,12 +224,6 @@
       <obj_property name="CustomSignalColor">#FFA500</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/tb/router/FLocal/last_flit">
-      <obj_property name="ElementShortName">last_flit</obj_property>
-      <obj_property name="ObjectShortName">last_flit</obj_property>
-      <obj_property name="CustomSignalColor">#FF0000</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-   </wvobject>
    <wvobject type="array" fp_name="/tb/router/FLocal/counter_flit">
       <obj_property name="ElementShortName">counter_flit[31:0]</obj_property>
       <obj_property name="ObjectShortName">counter_flit[31:0]</obj_property>
@@ -224,10 +242,6 @@
       <obj_property name="ElementShortName">readyE_i</obj_property>
       <obj_property name="ObjectShortName">readyE_i</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/tb/router/lastE_o">
-      <obj_property name="ElementShortName">lastE_o</obj_property>
-      <obj_property name="ObjectShortName">lastE_o</obj_property>
-   </wvobject>
    <wvobject type="logic" fp_name="/tb/router/validW_o">
       <obj_property name="ElementShortName">validW_o</obj_property>
       <obj_property name="ObjectShortName">validW_o</obj_property>
@@ -239,10 +253,6 @@
    <wvobject type="logic" fp_name="/tb/router/readyW_i">
       <obj_property name="ElementShortName">readyW_i</obj_property>
       <obj_property name="ObjectShortName">readyW_i</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/tb/router/lastW_o">
-      <obj_property name="ElementShortName">lastW_o</obj_property>
-      <obj_property name="ObjectShortName">lastW_o</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/tb/router/validN_o">
       <obj_property name="ElementShortName">validN_o</obj_property>
@@ -256,10 +266,6 @@
       <obj_property name="ElementShortName">readyN_i</obj_property>
       <obj_property name="ObjectShortName">readyN_i</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/tb/router/lastN_o">
-      <obj_property name="ElementShortName">lastN_o</obj_property>
-      <obj_property name="ObjectShortName">lastN_o</obj_property>
-   </wvobject>
    <wvobject type="logic" fp_name="/tb/router/validS_o">
       <obj_property name="ElementShortName">validS_o</obj_property>
       <obj_property name="ObjectShortName">validS_o</obj_property>
@@ -271,10 +277,6 @@
    <wvobject type="logic" fp_name="/tb/router/readyS_i">
       <obj_property name="ElementShortName">readyS_i</obj_property>
       <obj_property name="ObjectShortName">readyS_i</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/tb/router/lastS_o">
-      <obj_property name="ElementShortName">lastS_o</obj_property>
-      <obj_property name="ObjectShortName">lastS_o</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/tb/router/validL_o">
       <obj_property name="ElementShortName">validL_o</obj_property>

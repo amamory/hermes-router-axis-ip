@@ -10,7 +10,7 @@ end tb;
 
 architecture tb of tb is
     -- change here if you want to send more packets
-    constant N_PACKETS : integer := 4; 
+    --constant N_PACKETS : integer := 4; 
     -- change here if you want to send longer packets
     constant MAX_FLITS : integer := 3;
 
@@ -20,30 +20,50 @@ architecture tb of tb is
 	-- slave local port
     signal validL_i : std_logic;
     signal dataL_i  : std_logic_vector(31 downto 0);
-    signal readyL_o : std_logic;                    
+    signal readyL_o : std_logic;
+
+    -- other slave ports
+    signal validE_i : std_logic;
+    signal dataE_i  : std_logic_vector(31 downto 0);
+    signal readyE_o : std_logic;
+
+    signal validN_i : std_logic;
+    signal dataN_i  : std_logic_vector(31 downto 0);
+    signal readyN_o : std_logic;
+
+    signal validW_i : std_logic;
+    signal dataW_i  : std_logic_vector(31 downto 0);
+    signal readyW_o : std_logic;
+
+    signal validS_i : std_logic;
+    signal dataS_i  : std_logic_vector(31 downto 0);
+    signal readyS_o : std_logic;
 
 	-- master local port
     signal validL_o : std_logic;                    
+    signal lastL_o  : std_logic;
     signal dataL_o  : std_logic_vector(31 downto 0);
-    signal readyL_i : std_logic;                    
+    signal readyL_i : std_logic;
 	
     -- other master ports
     signal validE_o : std_logic;                    
     signal dataE_o  : std_logic_vector(31 downto 0);
-    signal readyE_i : std_logic;                    
+    signal readyE_i : std_logic;
             
     signal validW_o : std_logic;                    
     signal dataW_o  : std_logic_vector(31 downto 0);
-    signal readyW_i : std_logic;                    
+    signal readyW_i : std_logic;
             
     signal validN_o : std_logic;                    
     signal dataN_o  : std_logic_vector(31 downto 0);
-    signal readyN_i : std_logic;                    
+    signal readyN_i : std_logic;
             
     signal validS_o : std_logic;                    
     signal dataS_o  : std_logic_vector(31 downto 0);
-    signal readyS_i : std_logic;                    
+    signal readyS_i : std_logic;
             
+
+    type packet_t is array (0 to MAX_FLITS+1) of std_logic_vector(31 downto 0);	
 	
 	-- send one work according to the AXI Streaming master protocol
 	procedure SendFlit(signal clock  : in  std_logic;
@@ -66,6 +86,33 @@ architecture tb of tb is
         end loop;	
 	end procedure;
 	
+	procedure SendPacket(signal clock  : in  std_logic;
+                       constant packet : in  packet_t;
+                       --- AXI master streaming 
+                       signal data   : out std_logic_vector(31 downto 0);
+                       signal valid  : out std_logic;
+                       signal ready  : in  std_logic
+                       ) is
+        variable num_flits : integer;
+    begin
+         -- send header
+        SendFlit(clock,packet(0),data,valid,ready);
+        -- send size
+        SendFlit(clock,packet(1),data,valid,ready);
+        num_flits := to_integer(signed(packet(1)));
+        -- send payload
+        for f in 2 to num_flits+1 loop
+            SendFlit(clock,packet(f),data,valid,ready);
+        end loop;
+      -- end of the packet transfer
+        wait until rising_edge(clock);
+        wait for 4 ns;
+        valid <= '0';
+        data <= (others => '0');
+        -- wait a while to start the next packet transfer 
+        wait for 100 ns;    
+    end procedure;
+
 	
 begin
 
@@ -92,41 +139,35 @@ begin
     ----------------------------------------------------
     process
         -- it sends N_PACKETS packets of max size of of MAX_FLITS 
-        type packet_vet_t is array (0 to N_PACKETS-1, 0 to MAX_FLITS+1) of std_logic_vector(31 downto 0);
-        constant packet_vet : packet_vet_t := 
-            (
-                (x"00000201", x"00000001", x"00001234", x"00000000", x"00000000"), -- send it to the east
-                (x"00000102", x"00000001", x"00004321", x"00000000", x"00000000"), -- send it to the north
-                (x"00000001", x"00000003", x"11111111", x"22222222", x"33333333"), -- send it to the west
-                (x"00000100", x"00000003", x"44444444", x"55555555", x"66666666")  -- send it to the south
-            );
-         variable num_flits : integer;
+        --type packet_vet_t is array (0 to N_PACKETS-1, 0 to MAX_FLITS+1) of std_logic_vector(31 downto 0);
+        --constant packet_vet : packet_vet_t := 
+        --    (
+        --        (x"00000101", x"00000001", x"00001234", x"00000000", x"00000000"), -- from the east to local
+        --        (x"00000101", x"00000001", x"00004321", x"00000000", x"00000000"), -- from the north to local
+        --        (x"00000101", x"00000003", x"11111111", x"22222222", x"33333333"), -- from the west to local 
+        --        (x"00000101", x"00000003", x"44444444", x"55555555", x"66666666")  -- from the south to local
+        --    );
+         variable  packet : packet_t;
 	begin
 		validL_i <= '0';
 		dataL_i <= (others => '0');
 		wait for 200 ns;
 		wait until rising_edge(clock);
 		
-		for p in 0 to N_PACKETS-1 loop
-		  -- send header
-		  SendFlit(clock,packet_vet(p,0),dataL_i,validL_i,readyL_o);
-		  -- send size
-		  SendFlit(clock,packet_vet(p,1),dataL_i,validL_i,readyL_o);
-		  num_flits := to_integer(signed(packet_vet(p,1))) ;
-		  -- send payload
-		  for f in 2 to num_flits+1 loop
-		      SendFlit(clock,packet_vet(p,f),dataL_i,validL_i,readyL_o);
-		  end loop;
-		-- end of the packet transfer
-          wait until rising_edge(clock);
-          wait for 4 ns;
-          validL_i <= '0';
-          dataL_i <= (others => '0');
-          -- wait a while to start the next packet transfer 
-          wait for 100 ns;
-		end loop;
+		-- from the east to local
+		packet := (x"00000101", x"00000001", x"00001234", x"00000000", x"00000000");
+		SendPacket(clock, packet, dataE_i, validE_i, readyE_o);
+		-- from the north to local
+        packet := (x"00000101", x"00000001", x"00004321", x"00000000", x"00000000");
+        SendPacket(clock, packet, dataN_i, validN_i, readyN_o);
+		-- from the west to local
+        packet := (x"00000101", x"00000003", x"11111111", x"22222222", x"33333333");
+        SendPacket(clock, packet, dataW_i, validW_i, readyW_o);
+		-- from the south to local
+        packet := (x"00000101", x"00000003", x"44444444", x"55555555", x"66666666");
+        SendPacket(clock, packet, dataS_i, validS_i, readyS_o);
 		
-		-- blobk here. do not send it again
+		-- block here. do not send it again
 		wait;
 	end process;
 
@@ -136,21 +177,21 @@ begin
         clock    => clock,
         reset    => reset,
         -- AXI slave streaming interfaces
-        validE_i => '0',
-        dataE_i  => (others => '0'),
-        readyE_o => open,          
-
-        validW_i => '0',           
-        dataW_i  => (others => '0'),
-        readyW_o => open,          
-
-        validN_i => '0',           
-        dataN_i  => (others => '0'),
-        readyN_o => open,          
-
-        validS_i => '0',           
-        dataS_i  => (others => '0'),
-        readyS_o => open,          
+        validE_i => validE_i,
+        dataE_i  => dataE_i ,
+        readyE_o => readyE_o,
+                            
+        validW_i => validN_i,
+        dataW_i  => dataN_i ,
+        readyW_o => readyN_o,
+                            
+        validN_i => validW_i,
+        dataN_i  => dataW_i ,
+        readyN_o => readyW_o,
+                            
+        validS_i => validS_i,
+        dataS_i  => dataS_i ,
+        readyS_o => readyS_o,          
 
         validL_i => validL_i,
         dataL_i  => dataL_i ,
@@ -174,6 +215,7 @@ begin
         readyS_i => readyS_i,
 
         validL_o => validL_o,
+        lastL_o  => lastL_o,
         dataL_o  => dataL_o ,
         readyL_i => readyL_i
 	);
