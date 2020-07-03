@@ -12,10 +12,21 @@ set hdf_file [glob ./vivado/${design_name}/${design_name}.sdk/*.hdf]
 set hdf_file_dir "[file normalize "$hdf_file/"]"
 # get the full path 
 puts $hdf_file_dir
+
 # Create a HW project
-createhw -name hw1 -hwspec $hdf_file_dir
+set hw_dir ./vivado/${design_name}/${design_name}.sdk/hw1
+if {![file exist $hw_dir]} {
+    createhw -name hw1 -hwspec $hdf_file_dir
+} else {
+    openhw hw1
+}
 # Create a BSP project
-createbsp -name bsp1 -hwproject hw1 -proc ps7_cortexa9_0 -os standalone
+set bsp_dir ./vivado/${design_name}/${design_name}.sdk/bsp1
+if {![file exist $bsp_dir]} {
+    createbsp -name bsp1 -hwproject hw1 -proc ps7_cortexa9_0 -os standalone
+} else {
+    openbsp bsp1
+}
 
 # Each directory inside the src dir will become and xSDK's Application Project
 set list_apps [glob -directory ./src/ -type d *]
@@ -29,6 +40,11 @@ foreach app_dir_name $list_apps {
     set app_prj_name [lindex [split $app_dir_name "/"] end]
     #puts "$app_prj_name"    
     # Create application project
+    set app_dir ./vivado/${design_name}/${design_name}.sdk/$app_prj_name
+    # if the app were created before, then we skip to the next one
+    if {[file exist $app_dir]} {
+        continue
+    }    
     createapp -name $app_prj_name -hwproject hw1 -bsp bsp1 -proc ps7_cortexa9_0 -os standalone -lang C -app {Empty Application}
     # SDK does not allow to import sources with symbolic links. 
     # https://forums.xilinx.com/t5/Embedded-Development-Tools/xsdk-batch-import-sources-link-to-files/td-p/742063
