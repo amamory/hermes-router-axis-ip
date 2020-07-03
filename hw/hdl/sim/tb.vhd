@@ -151,6 +151,14 @@ begin
 	begin
 		validL_i <= '0';
 		dataL_i <= (others => '0');
+		validN_i <= '0';
+		dataN_i <= (others => '0');
+			validE_i <= '0';
+		dataE_i <= (others => '0');
+			validW_i <= '0';
+		dataW_i <= (others => '0');
+			validS_i <= '0';
+		dataS_i <= (others => '0');
 		wait for 200 ns;
 		wait until rising_edge(clock);
 		

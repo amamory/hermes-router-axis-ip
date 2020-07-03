@@ -11,13 +11,13 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="963314373fs"></ZoomStartTime>
-      <ZoomEndTime time="1063428139fs"></ZoomEndTime>
-      <Cursor1Time time="1080000000fs"></Cursor1Time>
+      <ZoomStartTime time="880844155fs"></ZoomStartTime>
+      <ZoomEndTime time="1204838084fs"></ZoomEndTime>
+      <Cursor1Time time="284000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="146"></NameColumnWidth>
-      <ValueColumnWidth column_width="73"></ValueColumnWidth>
+      <ValueColumnWidth column_width="69"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="59" />
    <wave_markers>
@@ -92,6 +92,12 @@
       <obj_property name="CustomSignalColor">#FF00FF</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
+   <wvobject type="array" fp_name="/tb/router/Last_Local/dataL_o">
+      <obj_property name="ElementShortName">dataL_o[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataL_o[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#0000FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
    <wvobject type="logic" fp_name="/tb/router/Last_Local/validL_o">
       <obj_property name="ElementShortName">validL_o</obj_property>
       <obj_property name="ObjectShortName">validL_o</obj_property>
@@ -101,12 +107,6 @@
    <wvobject type="logic" fp_name="/tb/router/Last_Local/lastL_o">
       <obj_property name="ElementShortName">lastL_o</obj_property>
       <obj_property name="ObjectShortName">lastL_o</obj_property>
-      <obj_property name="CustomSignalColor">#0000FF</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb/router/Last_Local/dataL_o">
-      <obj_property name="ElementShortName">dataL_o[31:0]</obj_property>
-      <obj_property name="ObjectShortName">dataL_o[31:0]</obj_property>
       <obj_property name="CustomSignalColor">#0000FF</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
