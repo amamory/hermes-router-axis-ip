@@ -1,4 +1,4 @@
-# Vivado MODULE NAME
+# Vivado Hermes NoC router IP
 
 This repo contains scripts to recreate the [Hermes network-on-chip router](https://www.sciencedirect.com/science/article/abs/pii/S0167926004000185) as a Vivado IP block with AXI streaming interfaces. The project is setup for Zedboard, although it would be easy to change to other boards assuming you have some basic TCL skills.
 
@@ -7,8 +7,7 @@ The scripts are quite reusable if you keep the same dir structure. It should be 
 # Module/IP design
 
 The router has five slave AXI streaming interfaces (named E_s, N_s, W_s, S_s, and L_s) and 
-five master AXI streaming interfaces (named E_m, N_m, W_m, S_m, and L_m). The L_m port is different from the other because it implements the LAST signal of the AXI streaming protocol. 
-This signal is required, for isntance, to use this router with the AXI's DMA module.
+five master AXI streaming interfaces (named E_m, N_m, W_m, S_m, and L_m). The L_m port is different from the other ports because it implements the LAST signal of the AXI streaming protocol. This signal is required, for instance, to use this router with the AXI's DMA module.
 
 ![Hermes router IP block](router.png)
 
