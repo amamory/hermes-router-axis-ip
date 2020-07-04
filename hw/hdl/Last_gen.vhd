@@ -39,7 +39,11 @@ architecture Last_gen of Last_gen is
 type state_type is (WAIT_HEADER,HEADER,PKT_SIZE,PAYLOAD,LAST_FLIT);
 signal state: state_type;
 
-signal flit_cnt: std_logic_vector(TAM_FLIT-1 downto 0);
+-- the max packet size is 2^max_packet_size
+-- there is no need to use 32 bits for this counter
+constant MAX_PACKET_SIZE : integer := 10;
+
+signal flit_cnt: std_logic_vector(MAX_PACKET_SIZE-1 downto 0);
 signal data_s: std_logic_vector(TAM_FLIT-1 downto 0);
 signal valid_s, readyL_s , lastL_s: std_logic;
 
@@ -84,12 +88,12 @@ begin
                     state <= HEADER;
                     if readyL_i = '1' and valid_i = '1' then
                         state <= PKT_SIZE;
-                        flit_cnt <= data_i;
+                        flit_cnt <= data_i(MAX_PACKET_SIZE-1 downto 0);
                     end if;
                 when PKT_SIZE =>
                     state <= PKT_SIZE;
                     if readyL_i = '1' and valid_i = '1' then
-                        if flit_cnt = x"0001" then
+                        if flit_cnt = 1 then
                             state <= WAIT_HEADER;
                             lastL_s <= '1';
                         else
