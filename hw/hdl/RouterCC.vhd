@@ -58,48 +58,49 @@ use work.HeMPS_defaults.all;
 entity RouterCC is
 generic( address: std_logic_vector(15 downto 0) := "0000000100000001");
 port(
-        clock:     in  std_logic;
-        reset:     in  std_logic;
+        clock   : in  std_logic;
+        reset   : in  std_logic;
         -- AXI Stream slave interfaces: E, W, N, S, Local ports
-        validE_i:     in  std_logic;
-        dataE_i:   in  std_logic_vector(TAM_FLIT-1 downto 0);
+        validE_i: in  std_logic;
+        dataE_i : in  std_logic_vector(TAM_FLIT-1 downto 0);
         readyE_o: out std_logic;    
 
-        validW_i:     in  std_logic;
-        dataW_i:   in  std_logic_vector(TAM_FLIT-1 downto 0);
+        validW_i: in  std_logic;
+        dataW_i : in  std_logic_vector(TAM_FLIT-1 downto 0);
         readyW_o: out std_logic;    
 
-        validN_i:     in  std_logic;
-        dataN_i:   in  std_logic_vector(TAM_FLIT-1 downto 0);
+        validN_i: in  std_logic;
+        dataN_i : in  std_logic_vector(TAM_FLIT-1 downto 0);
         readyN_o: out std_logic;    
 
-        validS_i:     in  std_logic;
-        dataS_i:   in  std_logic_vector(TAM_FLIT-1 downto 0);
+        validS_i: in  std_logic;
+        dataS_i : in  std_logic_vector(TAM_FLIT-1 downto 0);
         readyS_o: out std_logic;    
 
-        validL_i:     in  std_logic;
-        dataL_i:   in  std_logic_vector(TAM_FLIT-1 downto 0);
+        validL_i: in  std_logic;
+        dataL_i : in  std_logic_vector(TAM_FLIT-1 downto 0);
         readyL_o: out std_logic;    
 
         -- AXI Stream master interfaces: E, W, N, S, Local ports
-        validE_o:     out std_logic;
-        dataE_o:   out std_logic_vector(TAM_FLIT-1 downto 0);
+        validE_o: out std_logic;
+        dataE_o : out std_logic_vector(TAM_FLIT-1 downto 0);
         readyE_i: in  std_logic;
 
-        validW_o:     out std_logic;
-        dataW_o:   out std_logic_vector(TAM_FLIT-1 downto 0);
+        validW_o: out std_logic;
+        dataW_o : out std_logic_vector(TAM_FLIT-1 downto 0);
         readyW_i: in  std_logic;
 
-        validN_o:     out std_logic;
-        dataN_o:   out std_logic_vector(TAM_FLIT-1 downto 0);
+        validN_o: out std_logic;
+        dataN_o : out std_logic_vector(TAM_FLIT-1 downto 0);
         readyN_i: in  std_logic;
 
-        validS_o:     out std_logic;
-        dataS_o:   out std_logic_vector(TAM_FLIT-1 downto 0);
+        validS_o: out std_logic;
+        dataS_o : out std_logic_vector(TAM_FLIT-1 downto 0);
         readyS_i: in  std_logic;
 
-        validL_o:     out std_logic;
-        dataL_o:   out std_logic_vector(TAM_FLIT-1 downto 0);
+        validL_o: out std_logic;
+        lastL_o : out std_logic;
+        dataL_o : out std_logic_vector(TAM_FLIT-1 downto 0);
         readyL_i: in  std_logic
 
         );
@@ -223,22 +224,40 @@ begin
                 data_out => data_out_crossbar,
                 credit_i => credit_s);
 
+        Last_Local: Entity work.Last_gen
+        port map(
+                clock   => clock,  
+                reset   => reset,
+                -- these go the external side of the local port 
+                validL_o=> validL_o,
+                lastL_o => lastL_o,
+                dataL_o => dataL_o,
+                readyL_i=> readyL_i,
+                -- these go to the internal side of the router 
+                valid_i => tx(4),
+                data_i  => data_out_crossbar(4),
+                ready_o => credit_s(4)
+        );
+
+
+
+
         validE_o <= tx(0);
         validW_o <= tx(1);
         validN_o <= tx(2);
         validS_o <= tx(3);
-        validL_o <= tx(4);
+        --validL_o <= tx(4);
         
         credit_s(0) <= readyE_i;
         credit_s(1) <= readyW_i;
         credit_s(2) <= readyN_i;
         credit_s(3) <= readyS_i;
-        credit_s(4) <= readyL_i;
+        --credit_s(4) <= readyL_i;
         
         dataE_o <= data_out_crossbar(0);
         dataW_o <= data_out_crossbar(1);
         dataN_o <= data_out_crossbar(2);
         dataS_o <= data_out_crossbar(3);
-        dataL_o <= data_out_crossbar(4);
+        --dataL_o <= data_out_crossbar(4);
 
 end RouterCC;
