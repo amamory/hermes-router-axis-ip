@@ -70,17 +70,17 @@ architecture tb of tb is
 	                   constant flit : in  std_logic_vector(31 downto 0);
 	                   --- AXI master streaming 
 	                   signal data   : out std_logic_vector(31 downto 0);
-	                   signal valid  : out std_logic;
+	                   --signal valid  : out std_logic;
 	                   signal ready  : in  std_logic
 	                   ) is
 	begin
-		wait until rising_edge(clock);
+		--wait until rising_edge(clock);
 		-- If both the AXI interface and the router runs at the rising edge, then it is necessary to add 
 		--   a delay at the inputs. The solution was to put an inverted in the clock in the Router_Board entity. 
 		-- This way the delay is not necessary and it is also not necessary to change the router's vhdl   
         data <= flit;
-        valid <= '1';
-        wait for 8ns; -- simulate delay at the primary inputs
+        --valid <= '1';
+        wait for 1ns; -- simulate delay at the primary inputs
         while ready /= '1' loop
              wait until falling_edge(clock); -- data is buffered at the falling edge
         end loop;	
@@ -96,15 +96,20 @@ architecture tb of tb is
         variable num_flits : integer;
     begin
          -- send header
-        SendFlit(clock,packet(0),data,valid,ready);
+        wait until rising_edge(clock);
+        valid <= '1';
+        SendFlit(clock,packet(0),data,ready);
         -- send size
-        SendFlit(clock,packet(1),data,valid,ready);
+        wait until rising_edge(clock);
+        SendFlit(clock,packet(1),data,ready);
         num_flits := to_integer(signed(packet(1)));
         -- send payload
         for f in 2 to num_flits+1 loop
-            SendFlit(clock,packet(f),data,valid,ready);
+            wait until rising_edge(clock);
+            SendFlit(clock,packet(f),data,ready);
         end loop;
       -- end of the packet transfer
+        --
         wait until rising_edge(clock);
         wait for 4 ns;
         valid <= '0';
