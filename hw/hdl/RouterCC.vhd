@@ -59,7 +59,7 @@ entity RouterCC is
 generic( address: std_logic_vector(15 downto 0) := "0000000100000001");
 port(
         clock   : in  std_logic;
-        reset   : in  std_logic;
+        reset_n : in  std_logic; -- use always active low reset in block based design since all blocks are also active low
         -- AXI Stream slave interfaces: E, W, N, S, Local ports
         validE_i: in  std_logic;
         dataE_i : in  std_logic_vector(TAM_FLIT-1 downto 0);
@@ -115,13 +115,15 @@ signal free: std_logic_vector(4 downto 0);
 signal clock_rx: std_logic_vector(4 downto 0);
 signal tx: std_logic_vector(4 downto 0);
 signal credit_s: std_logic_vector(4 downto 0);
-
+signal reset : std_logic;
 begin
     clock_rx(0) <= clock;
     clock_rx(1) <= clock;
     clock_rx(2) <= clock;
     clock_rx(3) <= clock;
     clock_rx(4) <= clock;
+
+    reset <= not reset_n;
     
         FEast : Entity work.Hermes_buffer
         port map(
