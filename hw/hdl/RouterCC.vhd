@@ -118,11 +118,11 @@ signal credit_s: std_logic_vector(4 downto 0);
 signal reset : std_logic;
 
 begin
-    clock_rx(0) <= clock;
-    clock_rx(1) <= clock;
-    clock_rx(2) <= clock;
-    clock_rx(3) <= clock;
-    clock_rx(4) <= clock;
+    clock_rx(0) <= not clock;
+    clock_rx(1) <= not clock;
+    clock_rx(2) <= not clock;
+    clock_rx(3) <= not clock;
+    clock_rx(4) <= not clock;
     reset <= not reset_n;
     
         FEast : Entity work.Hermes_buffer
