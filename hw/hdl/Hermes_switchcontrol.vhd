@@ -21,7 +21,7 @@ use work.HeMPS_defaults.all;
 entity SwitchControl is
 port(
         clock :   in  std_logic;
-        reset :   in  std_logic;
+        reset_n : in  std_logic;
         h :       in  regNport;
         ack_h :   out regNport;
         address : in  regmetadeflit;
@@ -127,9 +127,9 @@ begin
         dirx <= WEST when lx > tx else EAST;
         diry <= NORTH when ly < ty else SOUTH;
 
-        process(reset,clock)
+        process(reset_n,clock)
         begin
-                if reset='1' then
+                if reset_n='0' then
                         ES<=S0;
                 -- amory, using only rising edge
                 elsif clock'event and clock='0' then
@@ -142,7 +142,7 @@ begin
         -- PARTE COMBINACIONAL PARA DEFINIR O PR�XIMO ESTADO DA M�QUINA.
         --
         -- SO -> O estado S0 � o estado de inicializa��o da m�quina. Este estado somente �
-        --       atingido quando o sinal reset � ativado.
+        --       atingido quando o sinal reset_n � ativado.
         -- S1 -> O estado S1 � o estado de espera por requisi��o de chaveamento. Quando o
         --       �rbitro recebe uma ou mais requisi��es o sinal ask � ativado fazendo a
         --       m�quina avan�ar para o estado S2.

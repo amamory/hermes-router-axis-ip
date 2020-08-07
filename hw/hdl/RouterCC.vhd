@@ -115,7 +115,6 @@ signal free: std_logic_vector(4 downto 0);
 signal clock_rx: std_logic_vector(4 downto 0);
 signal tx: std_logic_vector(4 downto 0);
 signal credit_s: std_logic_vector(4 downto 0);
-signal reset : std_logic;
 
 begin
     clock_rx(0) <= not clock;
@@ -123,12 +122,11 @@ begin
     clock_rx(2) <= not clock;
     clock_rx(3) <= not clock;
     clock_rx(4) <= not clock;
-    reset <= not reset_n;
     
         FEast : Entity work.Hermes_buffer
         port map(
                 clock => clock,
-                reset => reset,
+                reset_n => reset_n,
                 data_in => dataE_i,
                 rx => validE_i,
                 h => h(0),
@@ -143,7 +141,7 @@ begin
         FWest : Entity work.Hermes_buffer
         port map(
                 clock => clock,
-                reset => reset,
+                reset_n => reset_n,
                 data_in => dataW_i,
                 rx => validW_i,
                 h => h(1),
@@ -158,7 +156,7 @@ begin
         FNorth : Entity work.Hermes_buffer
         port map(
                 clock => clock,
-                reset => reset,
+                reset_n => reset_n,
                 data_in => dataN_i,
                 rx => validN_i,
                 h => h(2),
@@ -173,7 +171,7 @@ begin
         FSouth : Entity work.Hermes_buffer
         port map(
                 clock => clock,
-                reset => reset,
+                reset_n => reset_n,
                 data_in => dataS_i,
                 rx => validS_i,
                 h => h(3),
@@ -188,7 +186,7 @@ begin
         FLocal : Entity work.Hermes_buffer
         port map(
                 clock => clock,
-                reset => reset,
+                reset_n => reset_n,
                 data_in => dataL_i,
                 rx => validL_i,
                 h => h(4),
@@ -203,7 +201,7 @@ begin
         SwitchControl : Entity work.SwitchControl(XY)
         port map(
                 clock => clock,
-                reset => reset,
+                reset_n => reset_n,
                 h => h,
                 ack_h => ack_h,
                 address => address,
@@ -229,7 +227,7 @@ begin
         Last_Local: Entity work.Last_gen
         port map(
                 clock   => clock,  
-                reset   => reset,
+                reset_n   => reset_n,
                 -- these go the external side of the local port 
                 validL_o=> validL_o,
                 lastL_o => lastL_o,

@@ -48,7 +48,7 @@ use work.HeMPS_defaults.all;
 entity Hermes_buffer is
 port(
         clock:      in  std_logic;
-        reset:      in  std_logic;
+        reset_n:      in  std_logic;
         clock_rx:   in  std_logic;
         rx:         in  std_logic;
         data_in:    in  regflit;
@@ -112,9 +112,9 @@ begin
 
         -- Verifica se existe espa�o na fila para armazenamento de flits.
         -- Se existe espa�o na fila o sinal tem_espaco_na_fila � igual 1.
-        process(reset, clock_rx)
+        process(reset_n, clock_rx)
         begin
-                if reset='1' then
+                if reset_n='0' then
                         tem_espaco <= '1';
                 elsif clock_rx'event and clock_rx='1' then
                         if not((first=x"0" and last=TAM_BUFFER - 1) or (first=last+1)) then
@@ -128,14 +128,14 @@ begin
 
         credit_o <= tem_espaco;
 
-        -- O ponteiro last � inicializado com o valor zero quando o reset � ativado.
+        -- O ponteiro last � inicializado com o valor zero quando o reset_n � ativado.
         -- Quando o sinal rx � ativado indicando que existe um flit na porta de entrada �
         -- verificado se existe espa�o na fila para armazen�-lo. Se existir espa�o na fila o
         -- flit recebido � armazenado na posi��o apontada pelo ponteiro last e o mesmo �
         -- incrementado. Quando last atingir o tamanho da fila, ele recebe zero.
-        process(reset, clock_rx)
+        process(reset_n, clock_rx)
         begin
-                if reset='1' then
+                if reset_n='0' then
                         last <= (others=>'0');
                 elsif clock_rx'event and clock_rx='0' then
                         if tem_espaco='1' and rx='1' then
@@ -155,7 +155,7 @@ begin
         -- disponibiliza o dado para transmiss�o.
         data <= buf(CONV_INTEGER(first));
 
-        -- Quando sinal reset � ativado a m�quina de estados avan�a para o estado S_INIT.
+        -- Quando sinal reset_n � ativado a m�quina de estados avan�a para o estado S_INIT.
         -- No estado S_INIT os sinais counter_flit (contador de flits do corpo do pacote), h (que
         -- indica requisi��o de chaveamento) e data_av (que indica a exist�ncia de flit a ser
         -- transmitido) s�o inicializados com zero. Se existir algum flit na fila, ou seja, os
@@ -176,9 +176,9 @@ begin
         -- este ao n�mero de flits do corpo do pacote. Caso counter_flit seja diferente de um e de zero
         -- o mesmo � decrementado e a m�quina de estados permanece em S_PAYLOAD enviando o pr�ximo flit
         -- do pacote.
-        process(reset, clock)
+        process(reset_n, clock)
         begin
-                if reset='1' then
+                if reset_n='0' then
                         counter_flit <= (others=>'0');
                         h <= '0';
                         data_av <= '0';

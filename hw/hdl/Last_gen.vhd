@@ -21,7 +21,7 @@ use work.HeMPS_defaults.all;
 entity Last_gen is
 port(
         clock:    in  std_logic;
-        reset:    in  std_logic;
+        reset_n:  in  std_logic;
         -- these to the external side
         validL_o: out std_logic;
         lastL_o:  out std_logic;
@@ -53,9 +53,9 @@ begin
     dataL_o  <= data_s;
     ready_o  <= readyL_s;
     
-    process(reset, clock)
+    process(reset_n, clock)
     begin
-        if reset='1' then
+        if reset_n='0' then
             valid_s <= '0';
             data_s  <= (others => '0');
             readyL_s  <= '0';
@@ -69,9 +69,9 @@ begin
     end process;    
     
     
-    process(reset,clock)
+    process(reset_n,clock)
     begin
-        if reset='1' then
+        if reset_n='0' then
             state<=WAIT_HEADER;
             flit_cnt <= (others => '0'); 
             lastL_s <= '0';
