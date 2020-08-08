@@ -21,7 +21,7 @@ use work.HeMPS_defaults.all;
 entity SwitchControl is
 port(
         clock :   in  std_logic;
-        reset :   in  std_logic;
+        reset_n : in  std_logic;
         h :       in  regNport;
         ack_h :   out regNport;
         address : in  regmetadeflit;
@@ -127,9 +127,9 @@ begin
         dirx <= WEST when lx > tx else EAST;
         diry <= NORTH when ly < ty else SOUTH;
 
-        process(reset,clock)
+        process(reset_n,clock)
         begin
-                if reset='1' then
+                if reset_n='0' then
                         ES<=S0;
                 -- amory, using only rising edge
                 elsif clock'event and clock='0' then
