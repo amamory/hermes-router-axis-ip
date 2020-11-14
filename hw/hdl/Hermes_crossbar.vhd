@@ -16,7 +16,7 @@
 --              DATA_AV ->|              |
 --              DATA_IN ->|              |
 --             DATA_ACK <-|              |-> TX
---               SENDER ->|              |-> DATA_OUT
+--                        |              |-> DATA_OUT
 --                 FREE ->|              |<- CREDIT_I
 --               TAB_IN ->|              |
 --              TAB_OUT ->|              |

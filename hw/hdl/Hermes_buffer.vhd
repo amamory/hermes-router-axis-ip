@@ -26,17 +26,17 @@
 --                         --------------
 --
 --  Quando o algoritmo de chaveamento resulta no bloqueio dos flits de um pacote,
---  ocorre uma perda de desempenho em toda rede de interconex�o, porque os flits s�o
---  bloqueados n�o somente na chave atual, mas em todas as intermedi�rias.
+--  ocorre uma perda de desempenho em toda rede de interconexão, porque os flits são
+--  bloqueados não somente na chave atual, mas em todas as intermediárias.
 --  Para diminuir a perda de desempenho foi adicionada uma fila em cada porta de
 --  entrada da chave, reduzindo as chaves afetadas com o bloqueio dos flits de um
---  pacote. � importante observar que quanto maior for o tamanho da fila menor ser� o
---  n�mero de chaves intermedi�rias afetadas.
---  As filas usadas cont�m dimens�o e largura de flit parametriz�veis, para alter�-las
+--  pacote. É importante observar que quanto maior for o tamanho da fila menor será o
+--  número de chaves intermediárias afetadas.
+--  As filas usadas contém dimensão e largura de flit parametrizáveis, para alterá-las
 --  modifique as constantes TAM_BUFFER e TAM_FLIT no arquivo "packet.vhd".
 --  As filas funcionam como FIFOs circulares. Cada fila possui dois ponteiros: first e
---  last. First aponta para a posi��o da fila onde se encontra o flit a ser consumido.
---  Last aponta para a posi��o onde deve ser inserido o pr�ximo flit.
+--  last. First aponta para a posição da fila onde se encontra o flit a ser consumido.
+--  Last aponta para a posição onde deve ser inserido o próximo flit.
 ---------------------------------------------------------------------------------------
 library IEEE;
 use IEEE.std_logic_1164.all;
