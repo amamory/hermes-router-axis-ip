@@ -156,9 +156,9 @@ begin
         -- S7 -> O estado S7 é necessário para que a porta selecionada para roteamento baixe o sinal
         --       h.
         --
-        process(reset, clock)
+        process(reset_n, clock)
         begin
-                if reset='1' then
+                if reset_n='1' then
                         ES<=S0;
                 elsif clock'event and clock='1' then
                         case ES is

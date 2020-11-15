@@ -1,6 +1,7 @@
 # Vivado
 *.log
 *.jou
+*.str
 vivado/**
 
 #Visual Code studio
